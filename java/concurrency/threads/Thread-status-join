@@ -1,0 +1,22 @@
+* Is it possible to join to the thread which was not started? What will happen?
+  Examples:
+  void method() {
+  
+          log.info("Startedl application");
+
+        Thread t1 = new Thread(() -> {
+            log.info("Hello from the thread 1");
+        });
+
+//        t1.start();  //usually we expect that this t1 will start and after it we join to this Thread in the main thread; But what if we won't do it?
+
+        t1.join();
+        log.info("After join");
+//        t1.start(); //what if we will join to thread BEFORE running it? What will happen?
+  }
+  
+  Answer: nothing will happen, the join is possible and happend only to the Thread which was started;
+  If thread was not runned - the main thread won't do anything.
+  
+  Q: Can we join to the thread several times? Is it possible? What will happen?
+  A: Yes, possible, nothing will happen, because a thread just become `finished` and that's it;
