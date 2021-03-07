@@ -1,2 +1,74 @@
 Q: What is a deadlock? Can you give me an example?
 A: Deadlock definition, code below:
+Retard way: just to run a new thread in static block of the class which responds for the `private static void main(String[] args)`;
+Example:
+//----------------------------------------
+  public class ThreadWut {
+    private static boolean initialized = false;
+
+    static {
+        Thread t = new Thread(() -> initialized = true);
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    @SneakyThrows
+    public static void main(String[] args) {
+        ;
+    }
+}
+
+//----------------------------------------
+
+Or real example of deadlock (with two synchronized sections):
+@Slf4j
+public class DeadlockExample {
+    private final static Object lockObj1 = new Object();
+    private final static Object lockObj2 = new Object();
+
+    @SneakyThrows
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(new MyRunnable(lockObj2, lockObj1));
+        Thread thread2 = new Thread(new MyRunnable(lockObj1, lockObj2));
+
+        thread1.start();
+        thread2.start();
+        thread1.join();
+        thread2.join();
+        log.info("Finished in the " + Thread.currentThread().getName());
+    }
+}
+
+@Slf4j
+@RequiredArgsConstructor
+class MyRunnable implements Runnable {
+    private final Object lockObj1;
+    private final Object lockObj2;
+
+    @Override
+    public void run() {
+        log.info("Running thread1");
+        synchronized (lockObj2) {
+            log.info("Synchronized on " + lockObj1 + " in" + Thread.currentThread().getName());
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (lockObj1) {
+                log.info("Synchronized on " + lockObj2 + " in" + Thread.currentThread().getName());
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        log.info("Finished: " + Thread.currentThread().getName());
+    }
+}
+//----------------------------------------
