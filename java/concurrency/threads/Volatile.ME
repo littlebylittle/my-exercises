@@ -1,0 +1,27 @@
+Example of happens before and volatile variables;
+@Slf4j
+public class VolatileVar {
+    //volatile
+    private static boolean isAlive = true;
+
+    @SneakyThrows
+    public static void main(String[] args) {
+        Thread waiter00 = getWaiter00();
+        waiter00.start();
+
+        Thread.sleep(200);
+        isAlive = false;
+        waiter00.join();
+    }
+
+    @NotNull
+    private static Thread getWaiter00() {
+        return new Thread(() -> {
+            long counter = 0 ;
+            do {
+                counter += 1;
+            } while (isAlive);
+            System.out.println("counter  := " + counter);
+        });
+    }
+}
