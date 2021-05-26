@@ -27,3 +27,7 @@ def calculate_count(my_money    , price    , ticket_to_icecream):
         
         print(f"Iteration new-ice, tickets, bought, {new_ice} {tickets}, {bought}")
     return bought
+    
+   
+assert calculate_count(10, 2, 2) == 9
+assert calculate_count(30, 3, 2) == 19
