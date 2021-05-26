@@ -1,0 +1,29 @@
+Question:
+You have some amount of money, price for the ice-cream, and some discount stock number. After bying N-ice creams you can use thier barcodes to buy another one.
+So you have a function like
+calculate_count(money, price, barcode_discount), which should calculate how much ice cream you can buy.
+For example:
+  If you have: 
+calculate_count(10    , 2    , 2)
+you can buy: 10 / 2   -> you'll eat 5 ice creams
+              for 5 barcode you will eat 2 another icecreams & 1 free barcode
+              after eating 2 ice creams you will have 3 barcodes
+              after using 3 barcodes you will eat 1 ice cream and 1 unused barcode
+              after it you will have 2 barcode and you will eat another 1 ice cream
+              in total you will have 9 eaten ice cream and 1 unused barcode
+
+# Answer
+def calculate_count(my_money    , price    , ticket_to_icecream):
+    if (ticket_to_icecream <=1): raise #если за одну этикетку можно купить мороженно - то их покупать можно бесконечно
+    if (price <= 0): raise
+    if (my_money <= 0): return 0
+    
+    bought = tickets =  my_money // price
+    print(f"Begin: tickets, bought, {tickets}, {bought}")
+    while (tickets >= ticket_to_icecream) :
+        new_ice = tickets // ticket_to_icecream
+        bought += new_ice
+        tickets = (tickets % ticket_to_icecream) + new_ice
+        
+        print(f"Iteration new-ice, tickets, bought, {new_ice} {tickets}, {bought}")
+    return bought
