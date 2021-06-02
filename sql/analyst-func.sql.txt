@@ -1,0 +1,31 @@
+Есть таблица вида:
+accountId, examenName, date_field
+
+CREATE TABLE exams_history (
+    account_id number not null,
+    exam_id number not null,
+    date datetime notnull,
+   
+);
+
+CREATE TABLE exam_dict (
+    exam_id number not null primary key,
+    exam_name varchar2 not null,
+);
+
+
+CREATE TABLE accounts (
+    account_id number not null primary key,
+    name varchar2   
+);
+
+Внутри что-то такое
+Peter(9), 'math', 1997-09-01
+Peter(9), 'oracle', 2015-01-01
+Sonik(1), 'oracle', 2017-02-02
+
+И в history таблице миллионы записей.
+Тебе начальство сказало - информации столько не нужно удали все лишние записи из эстории этих экзаменов, оставь для каждого пользователя только 10 УНИКАЛЬНЫХ(по предмету) последних, 
+Как такое сделать?
+
+Т.е. для каждого аккаунта вернуть по 10 последних сданных экзаменов, без дублей по экзаменам. Т.е. никаких экзаменов по ораклу 2 раза.
