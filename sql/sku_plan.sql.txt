@@ -1,0 +1,31 @@
+Некоторое предприятие закупает продукцию и продаёт её
+Дана таблица закупок (приходов товаров) 
+Create table #incomes (
+    id int primary key clustered, 
+    sku_id FOREIGN KEY REFERENCES sku_table(sku_id),
+    date date, 
+    quant int);
+
+ 
+Дана таблица продаж (расходов товаров):
+Create table #sales (
+    id int primary key clustered,
+    sku_id FOREIGN KEY REFERENCES sku_table(sku_id), 
+    date date, 
+    quant int);
+ 
+ create table #sku_table (
+    sku_id number primary key not null,
+    sku_name varchar2 not null
+ )
+ 
+Необходимо связать продажи с закупками по методу FIFO (по дате). Т.е. из каких приходных партий был продан товар в каждой строке продаж. 
+Результат положить в следующую временную таблицу: 
+Create table #fifo (
+      sales_id int, 
+      incomes_id int, 
+      quant int, 
+      constraint PK_FIFO primary key clustered (sales_id, incomes_id)
+);
+
+Изначально предположить что товар в sku_table только один.
