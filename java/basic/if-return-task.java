@@ -11,14 +11,14 @@ class FinallyBlockAfterReturnTestTest {
     void firstTest() {
         int i = someMagicMethod();
         log.info("First guess and the result is : {}", i);
-        // assertEquals(i, ??);
+        assertEquals(i, ??);
     }
 
     @Test
     void secondTest() {
         int i = cycleFail();
         log.info("Second guess, and the result is : {}", i);
-        // assertEquals(i, ??);
+        assertEquals(i, ??);
     }
 
     int someMagicMethod() {
@@ -58,6 +58,7 @@ class FinallyBlockAfterReturnTestTest {
                         log.info("Trying to throw");
                         throw new RuntimeException("What the heck, `i` canot be equal to 1!");
                     }
+                    log.info("Trying to return 1");
                     return 1;
                 } catch (Throwable t) {
                     log.info("Trying to return 2");
