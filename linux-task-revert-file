@@ -1,0 +1,78 @@
+You have a simple text file, for example 10Mb size;
+Your task is to revert data inside the file.
+You are on linux machine.
+
+##  For example:
+> echo -ne 'aaa1bbb2222\ncccc33dddd44\n' > /tmp/simple
+> cat /tmp/simple
+aaa1bbb2222
+cccc33dddd44
+
+> tac /tmp/simple
+cccc33dddd44
+aaa1bbb2222
+
+#
+#So you can you rev/tac commands or write some for cycle or something else;
+Don't forget that file could be a large txt file (with logs, or some text-book);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wrong answer below:
+
+
+
+
+
+Wrong answer (and not working test). Why its wrong?
+#!/bin/bash
+
+curl 'https://baconipsum.com/api/?type=all-meat&paras=30000&start-with-lorem=1&format=html' > /tmp/aaa.part
+#aaa.part ~45 kilos, we need at least > 1.5 Mb;
+for i in `seq 100`; do cat /tmp/aaa.part >> /tmp/aaa; done;
+
+sed ':a;N;$!ba;s/\n/ /g' /tmp/aaa > /tmp/aaa-without-ends
+
+cat /tmp/aaa-without-ends >> /tmp/aaa #adding to the end the same data but without endings;
+rm /tmp/aaa-without-ends
+rm /tmp/aaa.part
+rm -rf /tmp/statistic*
+
+cp /tmp/aaa /tmp/aaa.bak #backup
+
+echo "size in bytes" >> /tmp/statistics-before
+ls -la /tmp/aaa >> /tmp/statistics-before
+echo "md5sum" >> /tmp/statistics-before
+md5sum /tmp/aaa >> /tmp/statistics-before
+
+REVERSE='tac' #replace it by rev
+$REVERSE /tmp/aaa | tee /tmp/aaa > /dev/null #first time
+sleep 2;
+ls -la /tmp/aaa
+$REVERSE /tmp/aaa | tee /tmp/aaa > /dev/null #second time returns file to previous state?
+sleep 2;
+
+echo "size in bytes" >> /tmp/statistics-after
+ls -la /tmp/aaa >> /tmp/statistics-after
+echo "md5sum" >> /tmp/statistics-after
+md5sum /tmp/aaa >> /tmp/statistics-after
+
+
+#compare result 
+cat /tmp/statistics*
+
+#diff /tmp/aaa /tmp/aaa.bak
+:;
