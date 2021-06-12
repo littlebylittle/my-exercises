@@ -2,6 +2,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+//What is going to haapen in this test?
+//Test will return 5555
+//Test will return 6666
+//Test will return 7777
+//Test will return 88888
+//Test will fail with RuntimeException
 
 @Slf4j
 public class CycleTryCatchFinallyTest {
