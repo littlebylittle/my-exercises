@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 //Test will return 6666
 //Test will return 7777
 //Test will return 88888
-//Test will fail with RuntimeException
+//Test will fail with a RuntimeException
 
 @Slf4j
 public class CycleTryCatchFinallyTest {
