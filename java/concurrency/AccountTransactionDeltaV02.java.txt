@@ -12,7 +12,7 @@ How would you do it?
 What kind of issues would we have?
 
 
-SO Your college write code bellow, what kind of issues does it have?
+SO Your college has written a code bellow, what kind of issues does it have?
 ///////////////
 package behaviour;
 
