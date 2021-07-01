@@ -1,0 +1,95 @@
+So you have a class something like this:
+public class Account {
+  private int balance; //current amount of money
+
+}
+
+
+You need to implement a method wich takes some amount of money from  account A, subtracts this amount from it and adds this value to the account B; 
+So you have method something like a `func(Account fromA, Account toB, int amountDelta);`
+
+How would you do it?
+What kind of issues would we have?
+
+
+SO Your college write code bellow, what kind of issues does it have?
+///////////////
+package behaviour;
+
+import lombok.ToString;
+
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+/*
+TODO:
+    atomicity
+    rollback transaction
+    check negative balance - do we need it reallY?
+    fast reading, block only on writing
+    volatile
+    SOLID? Desiqn issues?
+ */
+@ToString
+public class NaiveAccount {
+    private static final org.slf4j.ext.XLogger log = org.slf4j.ext.XLoggerFactory.getXLogger(NaiveAccount.class);
+    private volatile int money;
+    @ToString.Exclude
+    private ReadWriteLock lock = new ReentrantReadWriteLock();
+
+    public int getMoney() {
+        try {
+            lock.readLock().lock();
+            return money;
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    public void setMoney(int newMoney) {
+        if(newMoney < 0) {
+            throw new RuntimeException("Not enough money");
+        }
+        try {
+            lock.writeLock().lock();
+            this.money += newMoney;
+        }  finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    public void takeFrom(final NaiveAccount from, final int delta ) {
+        log.entry(from, delta);
+
+        final NaiveAccount to  = this;
+        int beforeTo = to.money;
+        int beforeFrom = from.money;
+
+        try {
+            to.lock.writeLock().lock();
+            /**/    from.lock.writeLock().lock();
+
+            if (to.money + delta < 0) {
+                throw new RuntimeException("Invalid operation: A");
+            }
+
+            if (from.money - delta < 0) {
+                throw new RuntimeException("Invalid operation: B");
+            }
+            from.money -= delta;
+            to.money += delta;
+        } catch (Exception e) {
+            this.money = beforeTo;
+            from.money = beforeFrom;
+            log.warn("Invalid operation occured, from: {}, to: {}, amount: {}, message: {} ", from, to, delta, e.getMessage());
+            throw e;
+        } finally {
+            /**/    from.lock.writeLock().unlock();
+            to.lock.writeLock().unlock();
+        }
+
+        log.exit();
+    }
+}
+
+////////////////////
