@@ -9,7 +9,7 @@ public class VolatileVar {
         Thread waiter00 = getWaiter00();
         waiter00.start();
 
-        Thread.sleep(200);
+        Thread.sleep(200); //without this sleep isAlive could be set to false, and then only waiter00 thread initialize cache variables;
         isAlive = false;
         waiter00.join();
     }
