@@ -1,0 +1,12 @@
+So you have a class something like this:
+public class Account {
+  private int balance; //current amount of money
+
+}
+
+
+You need to implement a method wich takes some amount of money from  account A, subtracts this amount from it and adds this value to the account B; 
+So you have method something like a `func(Account fromA, Account toB, int amountDelta);`
+
+How would you do it?
+What kind of issues would we have?
