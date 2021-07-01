@@ -25,3 +25,43 @@ public class VolatileVar {
         });
     }
 }
+
+
+////EXAMPLE 02
+package volatile1;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class VolatileMain {
+    static  boolean counterA = false;
+
+    @SneakyThrows
+    public static void main(String[] args) {
+        Thread thread01 = new Thread(() -> {
+            int i =0;
+            while (!counterA) {
+                i++;
+            }
+            System.out.println("current i = " + i);
+        });
+
+        Thread thread02 = new Thread(() -> {
+            try {
+                Thread.sleep(100); //exclude scenario when thread 2 will finish before thread 01
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            counterA = true;
+        });
+
+        thread01.start();
+        thread02.start();
+
+        thread01.join();
+        thread02.join();
+        log.info("Done");
+    }
+}
+
