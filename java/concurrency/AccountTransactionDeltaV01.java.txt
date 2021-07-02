@@ -5,7 +5,7 @@ public class Account {
 }
 
 
-You need to implement a method wich takes some amount of money from  account A, subtracts this amount from it and adds this value to the account B (makes a transaction between accounts); 
+You need to implement a method which takes some amount of money from  account A, subtracts this amount from it and adds this value to the account B (makes a transaction between accounts); 
 So you have method something like a `func makeTransaction(Account fromA, Account toB, int amountDelta);`
 
 How would you do it?
