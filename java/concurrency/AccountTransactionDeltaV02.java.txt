@@ -30,6 +30,8 @@ TODO: Questsions to discuss:
     volatile
     SOLID? Desiqn issues?
     Shall we escalate this issues on shoulders of some statefull engines (like databases, filesystem, queues, kafka etc?) and dont do lock on java level?
+    Threadsafety technicks. Maybe some immutability techincs or threadsafe algorithms.
+    Race conditions?
  */
 @ToString
 public class NaiveAccount {
