@@ -65,11 +65,11 @@ public class NaiveAccount {
         log.entry(from, delta);
 
         final NaiveAccount to  = this;
-        int beforeTo = to.money;
-        int beforeFrom = from.money;
+        int beforeTo = to.money;   //<--- is it an issue?
+        int beforeFrom = from.money; //<--- is it an issue?
 
         try {
-            to.lock.writeLock().lock();
+            to.lock.writeLock().lock(); //<--- is it an issue? (what if we call a.takeFrom(b, 10), and b.takeFrom(a, 10) simmultaniously? is it a possible deadlock ?)
             /**/    from.lock.writeLock().lock();
 
             if (to.money + delta < 0) {
