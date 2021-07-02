@@ -22,13 +22,14 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /*
-TODO:
+TODO: Questsions to discuss:
     atomicity
     rollback transaction
     check negative balance - do we need it reallY?
     fast reading, block only on writing
     volatile
     SOLID? Desiqn issues?
+    Shall we escalate this issues on shoulders of some statefull engines (like databases, queues etc?) and dont do lock on java level?
  */
 @ToString
 public class NaiveAccount {
