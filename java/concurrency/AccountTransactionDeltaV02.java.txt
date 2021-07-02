@@ -29,7 +29,7 @@ TODO: Questsions to discuss:
     fast reading, block only on writing
     volatile
     SOLID? Desiqn issues?
-    Shall we escalate this issues on shoulders of some statefull engines (like databases, queues etc?) and dont do lock on java level?
+    Shall we escalate this issues on shoulders of some statefull engines (like databases, filesystem, queues, kafka etc?) and dont do lock on java level?
  */
 @ToString
 public class NaiveAccount {
