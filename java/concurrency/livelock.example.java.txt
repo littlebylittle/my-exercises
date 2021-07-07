@@ -1,0 +1,4 @@
+Can you write your own livelock example?
+What is a livelock, differences with a deadlock?
+
+https://www.netjstech.com/2017/12/livelock-in-java-multi-threading.html
