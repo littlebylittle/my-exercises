@@ -1,4 +1,4 @@
-So you know that a String class is final and immutable or not?
+So as far as you know the String class is marked as final and immutable (or not)? What does it mean?
 
 You have a variable String, which was created as something like this:
 String a = removeService.getBigString(); //it returns a pretty big string something like 1GB size;
