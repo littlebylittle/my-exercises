@@ -1,4 +1,7 @@
-Questions related to mockito framework:
+Questions related to mockito framework and unit-testing:
+0. How it works under the hood? Is it possible to mock an interface? Abstract class? Nested class? Final class? Final method, static method? Private method?
+
+
 1. How mock works in mockito?  You have a task below, when you are calling an obj with the argument
 	'a' - it should return argument 'b' each time?
 	example: obj.method('a') -> 'b' every time
