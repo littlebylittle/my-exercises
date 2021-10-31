@@ -60,6 +60,8 @@ Questions related to mockito framework and unit-testing:
 
 16. Have you ever seen the issue something like 'you created a mock, but haven't used it';
 	When it could be an issue?
+	String stubbing and leninent stubbing. 
+	How to fix this issue?
 
 17. Experience with migration from junit4 to junit5, what could be an issue?
 
