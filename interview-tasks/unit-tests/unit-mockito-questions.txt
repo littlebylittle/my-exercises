@@ -1,0 +1,64 @@
+Questions related to mockito framework:
+1. How mock works in mockito?  You have a task below, when you are calling an obj with the argument
+	'a' - it should return argument 'b' each time?
+	example: obj.method('a') -> 'b' every time
+	
+2.1 Mock like this:
+	example: obj.method('a') -> 'b1'
+	second call: obj.method('a') -> 'b2'
+	third call: obj.method('a') -> 'b3' 
+	....etc
+	
+2.2. Returning multiple values against consecutive method calls:
+	like you need to mock only 1st, 2nd, 3rd call with different returning data, how would you do that?
+	
+3. You have a long chain of call like:
+	// new Person().getChildren().getChildren(1).getCustomer().getListOfSubj().connection().name();
+	how would you mock this class?
+	
+4. You have a long chain of objects like:
+	Person() *
+		-> Children() **
+			-> Customer() ***
+				-> List<Subj> ****
+					-> Connection() -> *****
+						Name<String> () ******
+	you are callign some logic and want to know what was the intermediate value of the input arugments 
+	for the step (****). And what was the result on the step ***. How would you do that?
+	
+5. Is it possible to cound how many times each method was called and with which arguments? How?
+
+6. Is it possible to catch a scenario when your code throws an exception?
+
+7. How to throw an exception instead of the mocking data?
+
+8. When and why should a spy be used? Differenced between spy and mock ?
+
+9. What is a good testable code?
+	Acronym FIRST:
+	[F]ast
+	[I]solated
+	[R]epeatable
+	[S]elf-validating
+	[T]imely
+
+10. Annotations @MockBean, @MockSpy, @ExtendWith(@MockitoExtension.class), when and why?
+
+11. Is it possible to verify the order of interactions? Like at first we called `methodA(...)` 
+	and after that we called `methodB` and `methodC` ?
+
+12. What is any(), anyString() ?
+
+13. Mocking static methods? How?
+
+14. callRealMethods? Why? How? What is the main purpose?
+
+15. Testing private methods how?
+
+16. Have you ever seen the issue something like 'you created a mock, but haven't used it';
+	When it could be an issue?
+
+17. Experience with migration from junit4 to junit5, what could be an issue?
+
+https://www.softwaretestinghelp.com/mockito-inteview-questions/
+https://www.baeldung.com/mockito-series
