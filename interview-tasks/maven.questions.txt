@@ -1,0 +1,18 @@
+what is .m2/
+settings.xml mention this
+pom.xml
+what is a `Profiles` section (mvn -pProfile1 etc) 
+dependecyManagment section and dependencies (parenting and version)
+dependency transitivity
+dependency exclusions
+plugin management
+plugin => how to attach plugin to the different lifecycle (and default phase)
+plugin configuration for each `goal`
+dependency scopes (compile, test, provided==api, runtime=impl, system => systemPath tag)
+lifecycle steps (https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+steps execution (see lifecycle)
+what is a maven local repo and maven-central
+maybe deploy and site commands
+difference with ant/ivy/gradle (like there is more conventions, restrictions and xml+xsd restrictions (so autocomletion by your IDE is possible))
+versioning artifacts (+ SNAPSHOT)
+tests, how to run tests, how to skip tests etc
